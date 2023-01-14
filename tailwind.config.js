@@ -3,7 +3,11 @@ module.exports = {
   darkMode: 'class',
   content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      borderRadius: {
+        component: '0.3125rem'
+      }
+    },
     colors: {
       primary: 'hsl(220, 98%, 61%)',
       light: {
@@ -22,20 +26,21 @@ module.exports = {
         inactive: 'hsl(236, 33%, 92%)',
         text: 'hsl(234, 39%, 85%)',
         hover: 'hsl(236, 33%, 92%)'
-      }
+      },
+      white: 'white'
     },
     fontSize: {
       'title-m': [
         '1.6875rem',
         {
-          letterSpacing: '0.035em',
+          letterSpacing: '0.35em',
           fontWeight: '700'
         }
       ],
       'title-d': [
         '2.5rem',
         {
-          letterSpacing: '0.037em',
+          letterSpacing: '0.37em',
           fontWeight: '700'
         }
       ],
