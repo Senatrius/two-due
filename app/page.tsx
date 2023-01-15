@@ -42,6 +42,7 @@ export default function Index() {
 
   const toggleItem = (e: React.MouseEvent<HTMLInputElement>) => {
     const newTasks = [...tasks];
+
     const clickedTaskIndex = newTasks.findIndex(
       task => task.id === (e.target as HTMLInputElement).id
     );
@@ -50,16 +51,28 @@ export default function Index() {
     setTasks(newTasks);
   };
 
+  const deleteItem = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const newTasks = [...tasks];
+
+    const clickedTaskIndex = newTasks.findIndex(
+      task => task.id === (e.target as HTMLInputElement).id
+    );
+
+    newTasks.splice(clickedTaskIndex, 1);
+    setTasks(newTasks);
+  };
+
   const addNewTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const newTask = {
-      id: Date.now(),
+      id: Date.now().toString(),
       task: taskInput,
       completed: false
     };
 
     setTasks([...tasks, newTask]);
+    setTaskInput('');
   };
 
   return (
@@ -69,7 +82,9 @@ export default function Index() {
         taskInput={taskInput}
         setTaskInput={setTaskInput}
       />
-      <TodoList {...{ tasks, filteredTasks, filter, setFilter, toggleItem }} />
+      <TodoList
+        {...{ tasks, filteredTasks, filter, setFilter, toggleItem, deleteItem }}
+      />
       <Info />
     </main>
   );

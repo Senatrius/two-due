@@ -6,12 +6,14 @@ export const TodoItem = ({
   id,
   task,
   completed,
-  onClick
+  toggleItem,
+  deleteItem
 }: {
   id: string;
   task: string;
   completed: boolean;
-  onClick: (e: React.MouseEvent<HTMLInputElement>) => void;
+  toggleItem: (e: React.MouseEvent<HTMLInputElement>) => void;
+  deleteItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }) => {
   return (
     <li className='border-light-complete dark:border-dark-inactive [&:not(:last-child)]:border-b-[1px]'>
@@ -21,7 +23,7 @@ export const TodoItem = ({
           type='checkbox'
           name={id}
           id={id}
-          onClick={e => onClick(e)}
+          onClick={e => toggleItem(e)}
           onChange={() => {}}
           checked={completed}
         />
@@ -32,6 +34,7 @@ export const TodoItem = ({
         </label>
         <button
           type='button'
+          onClick={e => deleteItem(e)}
           className='hidden text-light-inactive hover:text-light-hover group-hover:inline-block dark:text-dark-inactive dark:hover:text-dark-hover'>
           <svg
             xmlns='http://www.w3.org/2000/svg'

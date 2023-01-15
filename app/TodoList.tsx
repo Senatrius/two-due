@@ -9,13 +9,15 @@ export const TodoList = ({
   setFilter,
   tasks,
   filteredTasks,
-  toggleItem
+  toggleItem,
+  deleteItem
 }: {
   filter: string;
   setFilter: React.Dispatch<React.SetStateAction<string>>;
   tasks: ITodo[];
   filteredTasks: ITodo[];
   toggleItem: (e: React.MouseEvent<HTMLInputElement>) => void;
+  deleteItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }) => {
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -37,7 +39,8 @@ export const TodoList = ({
             id={task.id}
             task={task.task}
             completed={task.completed}
-            onClick={toggleItem}
+            toggleItem={toggleItem}
+            deleteItem={deleteItem}
           />
         ))}
         <TodoDetails items={tasks.filter(task => !task.completed).length}>
