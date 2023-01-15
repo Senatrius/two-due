@@ -62,6 +62,14 @@ export default function Index() {
     setTasks(newTasks);
   };
 
+  const deleteCompletedItems = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const newTasks = [...tasks];
+
+    const incompleteTasks = newTasks.filter(task => !task.completed);
+
+    setTasks(incompleteTasks);
+  };
+
   const addNewTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -83,7 +91,15 @@ export default function Index() {
         setTaskInput={setTaskInput}
       />
       <TodoList
-        {...{ tasks, filteredTasks, filter, setFilter, toggleItem, deleteItem }}
+        {...{
+          tasks,
+          filteredTasks,
+          filter,
+          setFilter,
+          toggleItem,
+          deleteItem,
+          deleteCompletedItems
+        }}
       />
       <Info />
     </main>

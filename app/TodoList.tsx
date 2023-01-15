@@ -10,7 +10,8 @@ export const TodoList = ({
   tasks,
   filteredTasks,
   toggleItem,
-  deleteItem
+  deleteItem,
+  deleteCompletedItems
 }: {
   filter: string;
   setFilter: React.Dispatch<React.SetStateAction<string>>;
@@ -18,6 +19,7 @@ export const TodoList = ({
   filteredTasks: ITodo[];
   toggleItem: (e: React.MouseEvent<HTMLInputElement>) => void;
   deleteItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  deleteCompletedItems: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }) => {
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -43,7 +45,9 @@ export const TodoList = ({
             deleteItem={deleteItem}
           />
         ))}
-        <TodoDetails items={tasks.filter(task => !task.completed).length}>
+        <TodoDetails
+          items={tasks.filter(task => !task.completed).length}
+          deleteCompletedItems={deleteCompletedItems}>
           {width >= 767 && (
             <ul className='dark:text-dark-complete flex items-center gap-4 text-controls text-light-inactive'>
               <li
