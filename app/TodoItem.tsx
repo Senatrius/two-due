@@ -1,6 +1,4 @@
-import Image from 'next/image';
 import React from 'react';
-import { ITodo } from './page';
 
 export const TodoItem = ({
   id,
@@ -16,7 +14,7 @@ export const TodoItem = ({
   deleteItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }) => {
   return (
-    <li className='border-light-complete dark:border-dark-inactive [&:not(:last-child)]:border-b-[1px]'>
+    <li className='bg-light-element dark:bg-dark-element'>
       <div className='group flex items-center gap-4 px-5 md:gap-6 md:px-[1.375rem]'>
         <input
           className='peer'
@@ -42,7 +40,7 @@ export const TodoItem = ({
             height='18'>
             <path
               fill='currentColor'
-              fill-rule='evenodd'
+              fillRule='evenodd'
               d='M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z'
             />
           </svg>
