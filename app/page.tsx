@@ -1,9 +1,9 @@
 'use client';
 
+import { DragDropContext } from 'react-beautiful-dnd';
 import { useState, useEffect } from 'react';
 import { Info } from './Info';
 import { Input } from './Input';
-import { TodoItem } from './TodoItem';
 import { TodoList } from './TodoList';
 import demoData from '../public/demoTodos.json';
 
@@ -49,22 +49,16 @@ export default function Index() {
     setTasks(newTasks);
   };
 
+  const onDragEnd = () => {};
+
   return (
     <main>
       <Input />
-      <TodoList
-        tasks={tasks.filter(task => task.completed === false).length}
-        {...{ filter, setFilter }}>
-        {filteredTasks.map(task => (
-          <TodoItem
-            key={task.id}
-            id={task.id}
-            task={task.task}
-            completed={task.completed}
-            onClick={toggleItem}
-          />
-        ))}
-      </TodoList>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <TodoList
+          {...{ tasks, filteredTasks, filter, setFilter, toggleItem }}
+        />
+      </DragDropContext>
       <Info />
     </main>
   );
