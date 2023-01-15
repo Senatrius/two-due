@@ -1,6 +1,18 @@
-export const Input = () => {
+import React, { SetStateAction } from 'react';
+
+export const Input = ({
+  onSubmit,
+  taskInput,
+  setTaskInput
+}: {
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  taskInput: string;
+  setTaskInput: React.Dispatch<SetStateAction<string>>;
+}) => {
   return (
-    <form className='relative'>
+    <form
+      className='relative'
+      onSubmit={onSubmit}>
       <label
         htmlFor='new'
         className='sr-only'>
@@ -13,6 +25,10 @@ export const Input = () => {
         name='new'
         id='new'
         placeholder='Create a new todo...'
+        value={taskInput}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setTaskInput(e.target.value)
+        }
       />
     </form>
   );

@@ -25,6 +25,7 @@ const getStoredTodos = () => {
 };
 
 export default function Index() {
+  const [taskInput, setTaskInput] = useState<string>('');
   const [filter, setFilter] = useState<string>('all');
   const [tasks, setTasks] = useState<ITodo[]>(getStoredTodos());
 
@@ -49,16 +50,26 @@ export default function Index() {
     setTasks(newTasks);
   };
 
-  const onDragEnd = () => {};
+  const addNewTodo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const newTask = {
+      id: Date.now(),
+      task: taskInput,
+      completed: false
+    };
+
+    setTasks([...tasks, newTask]);
+  };
 
   return (
     <main>
-      <Input />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <TodoList
-          {...{ tasks, filteredTasks, filter, setFilter, toggleItem }}
-        />
-      </DragDropContext>
+      <Input
+        onSubmit={addNewTodo}
+        taskInput={taskInput}
+        setTaskInput={setTaskInput}
+      />
+      <TodoList {...{ tasks, filteredTasks, filter, setFilter, toggleItem }} />
       <Info />
     </main>
   );
