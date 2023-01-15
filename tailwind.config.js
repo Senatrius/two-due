@@ -22,8 +22,8 @@ module.exports = {
       dark: {
         bg: 'hsl(235, 21%, 11%)',
         element: 'hsl(235, 24%, 19%)',
-        shadow: 'black',
-        inactive: 'hsl(236, 33%, 92%)',
+        shadow: 'hsl(0, 0%, 0%, .5)',
+        inactive: 'hsl(233, 14%, 35%)',
         text: 'hsl(234, 39%, 85%)',
         hover: 'hsl(236, 33%, 92%)'
       },
