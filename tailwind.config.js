@@ -10,6 +10,7 @@ module.exports = {
     },
     colors: {
       primary: 'hsl(220, 98%, 61%)',
+      error: 'hsl(355, 87%, 61%)',
       light: {
         bg: 'hsl(0, 0%, 98%)',
         element: 'white',

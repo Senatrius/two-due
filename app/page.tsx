@@ -25,6 +25,7 @@ const getStoredTodos = () => {
 };
 
 export default function Index() {
+  const [error, setError] = useState<string>('');
   const [taskInput, setTaskInput] = useState<string>('');
   const [filter, setFilter] = useState<string>('all');
   const [tasks, setTasks] = useState<ITodo[]>(getStoredTodos());
@@ -73,6 +74,11 @@ export default function Index() {
   const addNewTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if(taskInput === "") {
+      setError("Please enter a task")
+      return;
+    }
+
     const newTask = {
       id: Date.now().toString(),
       task: taskInput,
@@ -86,6 +92,8 @@ export default function Index() {
   return (
     <main>
       <Input
+        error={error}
+        setError={setError}
         onSubmit={addNewTodo}
         taskInput={taskInput}
         setTaskInput={setTaskInput}
