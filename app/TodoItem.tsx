@@ -36,6 +36,7 @@ export const TodoItem = ({
           onClick={e => deleteItem(e)}
           className='hidden text-light-inactive hover:text-light-hover group-hover:inline-block dark:text-dark-inactive dark:hover:text-dark-hover'>
           <svg
+            className='pointer-events-none'
             xmlns='http://www.w3.org/2000/svg'
             width='18'
             height='18'>

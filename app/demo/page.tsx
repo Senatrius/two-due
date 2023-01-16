@@ -62,7 +62,7 @@ export default function Index() {
     const newTasks = [...tasks];
 
     const clickedTaskIndex = newTasks.findIndex(
-      task => task.id === (e.target.parentElement as HTMLButtonElement).id
+      task => task.id === (e.target as HTMLButtonElement).id
     );
 
     newTasks.splice(clickedTaskIndex, 1);
