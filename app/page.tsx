@@ -1,115 +1,92 @@
 'use client';
 
-import { DragDropContext } from 'react-beautiful-dnd';
-import { useState, useEffect } from 'react';
-import { Info } from './Info';
-import { Input } from './Input';
-import { TodoList } from './TodoList';
-import demoData from '../public/demoTodos.json';
+import FocusTrap from 'focus-trap-react';
+import { useState } from 'react';
+import { AreaInput } from './AreaInput';
+import { NewTodoButton } from './NewTodoButton';
+import { TextInput } from './TextInput';
+import { TodoCard } from './TodoCard';
 
-export interface ITodo {
+interface ITodoLists {
   id: string;
-  task: string;
-  completed: boolean;
+  slug: string;
+  title: string;
+  description: string;
+  createdAt: string;
 }
 
-const getStoredTodos = () => {
-  const storedTodo =
-    typeof window !== 'undefined' ? localStorage.getItem('todo') : null;
-
-  if (storedTodo) {
-    return JSON.parse(storedTodo);
-  } else {
-    return demoData;
-  }
-};
-
 export default function Index() {
-  const [error, setError] = useState<string>('');
-  const [taskInput, setTaskInput] = useState<string>('');
-  const [filter, setFilter] = useState<string>('all');
-  const [tasks, setTasks] = useState<ITodo[]>(getStoredTodos());
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [todoLists, setTodoLists] = useState<ITodoLists[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    localStorage.setItem('todo', JSON.stringify(tasks));
-  }, [tasks]);
-
-  const filteredTasks =
-    filter === 'completed'
-      ? tasks.filter(task => task.completed === true)
-      : filter === 'active'
-      ? tasks.filter(task => task.completed === false)
-      : tasks;
-
-  const toggleItem = (e: React.MouseEvent<HTMLInputElement>) => {
-    const newTasks = [...tasks];
-
-    const clickedTaskIndex = newTasks.findIndex(
-      task => task.id === (e.target as HTMLInputElement).id
-    );
-    newTasks[clickedTaskIndex].completed =
-      !newTasks[clickedTaskIndex].completed;
-    setTasks(newTasks);
-  };
-
-  const deleteItem = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const newTasks = [...tasks];
-
-    const clickedTaskIndex = newTasks.findIndex(
-      task => task.id === (e.target as HTMLInputElement).id
-    );
-
-    newTasks.splice(clickedTaskIndex, 1);
-    setTasks(newTasks);
-  };
-
-  const deleteCompletedItems = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const newTasks = [...tasks];
-
-    const incompleteTasks = newTasks.filter(task => !task.completed);
-
-    setTasks(incompleteTasks);
-  };
-
-  const addNewTodo = (e: React.FormEvent<HTMLFormElement>) => {
+  const createTodoList = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if(taskInput === "") {
-      setError("Please enter a task")
-      return;
-    }
-
-    const newTask = {
+    const newTodoList = {
       id: Date.now().toString(),
-      task: taskInput,
-      completed: false
+      slug: title.toLowerCase().replaceAll(' ', '-') || Date.now().toString(),
+      title: title || 'Untitled list',
+      description: description,
+      createdAt: new Date().toISOString().slice(0, 10)
     };
 
-    setTasks([...tasks, newTask]);
-    setTaskInput('');
+    setTodoLists([...todoLists, newTodoList]);
+    setIsModalOpen(false);
+    setTitle("")
+    setDescription("")
   };
 
   return (
-    <main>
-      <Input
-        error={error}
-        setError={setError}
-        onSubmit={addNewTodo}
-        taskInput={taskInput}
-        setTaskInput={setTaskInput}
-      />
-      <TodoList
-        {...{
-          tasks,
-          filteredTasks,
-          filter,
-          setFilter,
-          toggleItem,
-          deleteItem,
-          deleteCompletedItems
-        }}
-      />
-      <Info />
-    </main>
+    <>
+      <main className='mx-auto mb-[4.25rem] grid w-[87%] grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4 lg:gap-8'>
+        <TodoCard
+          to='/demo'
+          title='Demo ToDo List'
+          description='Demo todo list created using designs provided by Frontend Mentor.'
+          date='2023-01-14'
+        />
+        {todoLists.map(list => (
+          <TodoCard
+            key={list.id}
+            to={`/${list.slug}`}
+            title={list.title}
+            description={list.description}
+            date={list.createdAt}
+          />
+        ))}
+        <NewTodoButton {...{ isModalOpen, setIsModalOpen }} />
+      </main>
+      {isModalOpen && (
+        <div
+          aria-expanded={isModalOpen}
+          aria-label='New Todo list modal'
+          className='fixed inset-0 flex h-full w-full overflow-y-auto bg-dark-shadow py-12'>
+          <FocusTrap>
+            <form
+              onSubmit={createTodoList}
+              className='relative my-auto mx-auto flex h-auto w-[87%] max-w-[30rem] flex-col items-start gap-3 rounded-component bg-light-element px-4 pt-3.5 pb-5 shadow-xl shadow-light-shadow dark:bg-dark-element md:gap-4 md:px-6'>
+              <h3 className='text-modal-m md:text-modal-d'>New Todo List</h3>
+              <TextInput {...{ title, setTitle }} />
+              <AreaInput {...{ description, setDescription }} />
+              <div className='flex w-full flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-between md:gap-4'>
+                <button
+                  type='submit'
+                  className='rounded-component bg-primary px-5 py-3.5 text-controls'>
+                  Create a new list
+                </button>
+                <button
+                  type='button'
+                  onClick={() => setIsModalOpen(false)}
+                  className='border-box rounded-component border-[3px] border-primary px-5 py-3.5 text-controls'>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </FocusTrap>
+        </div>
+      )}
+    </>
   );
 }

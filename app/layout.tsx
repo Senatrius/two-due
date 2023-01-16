@@ -14,11 +14,9 @@ export default function RootLayout({
     <html
       className={`min-h-full ${darkMode ? 'dark' : ''}`}
       lang='en'>
-      <body className='bg-siz min-h-full bg-light-bg bg-light-m bg-contain bg-no-repeat text-light-text dark:bg-dark-bg dark:bg-dark-m dark:text-dark-text md:bg-light-d dark:md:bg-dark-d'>
-        <div className='mx-auto w-[87%] md:w-[72%] lg:w-[55%] xl:w-[37.5%]'>
-          <Header {...{ darkMode, setDarkMode }} />
-          {children}
-        </div>
+      <body className='min-h-full bg-light-bg bg-light-m bg-contain bg-no-repeat text-light-text outline-primary dark:bg-dark-bg dark:bg-dark-m dark:text-dark-text md:bg-light-d dark:md:bg-dark-d'>
+        <Header {...{ darkMode, setDarkMode }} />
+        {children}
       </body>
     </html>
   );

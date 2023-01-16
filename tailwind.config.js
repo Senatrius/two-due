@@ -18,7 +18,7 @@ module.exports = {
       light: {
         bg: 'hsl(0, 0%, 98%)',
         element: 'white',
-        shadow: 'hsl(236, 33%, 92%)',
+        shadow: 'hsl(0, 0%, 0%, .2)',
         complete: 'hsl(233, 11%, 84%)',
         inactive: 'hsl(236, 9%, 61%)',
         text: 'hsl(235, 19%, 35%)',
@@ -63,6 +63,27 @@ module.exports = {
         {
           letterSpacing: '-0.015em',
           fontWeight: '400'
+        }
+      ],
+      'card-title': [
+        '1.125rem',
+        {
+          letterSpacing: '-0.015em',
+          fontWeight: '700'
+        }
+      ],
+      'modal-d': [
+        '1.5rem',
+        {
+          letterSpacing: '-0.015em',
+          fontWeight: '700'
+        }
+      ],
+      'modal-m': [
+        '1.375rem',
+        {
+          letterSpacing: '-0.015em',
+          fontWeight: '700'
         }
       ],
       info: [
