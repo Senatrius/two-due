@@ -17,7 +17,7 @@ export const TodoItem = ({
     <li className='bg-light-element dark:bg-dark-element'>
       <div className='group flex items-center gap-4 px-5 md:gap-6 md:px-[1.375rem]'>
         <input
-          className='peer'
+          className='peer h-5 w-5 shrink-0 appearance-none whitespace-nowrap rounded-full border-[1px] border-light-complete bg-center bg-no-repeat checked:bg-primary checked:bg-hero-pattern dark:border-dark-inactive md:h-6 md:w-6'
           type='checkbox'
           name={id}
           id={id}

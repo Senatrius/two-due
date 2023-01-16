@@ -39,7 +39,7 @@ export const TodoList = ({
   }, []);
 
   const onDragEnd = (result: any) => {
-    if (!result.destination) {
+    if (!result.destination || filter !== 'all') {
       return;
     }
 

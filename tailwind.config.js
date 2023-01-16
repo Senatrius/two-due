@@ -6,6 +6,10 @@ module.exports = {
     extend: {
       borderRadius: {
         component: '0.3125rem'
+      },
+      backgroundImage: {
+        'hero-pattern':
+          "url('../public/icon-check.svg'), linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%))"
       }
     },
     colors: {
@@ -28,7 +32,9 @@ module.exports = {
         text: 'hsl(234, 39%, 85%)',
         hover: 'hsl(236, 33%, 92%)'
       },
-      white: 'white'
+      white: 'white',
+      'gradient-start': 'hsl(192, 100%, 67%)',
+      'gradient-end': 'hsl(280, 87%, 65%)'
     },
     fontSize: {
       'title-m': [
