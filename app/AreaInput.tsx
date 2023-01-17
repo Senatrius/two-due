@@ -19,7 +19,7 @@ export const AreaInput = ({
         name='description'
         id='description'
         placeholder='Enter a todo list description...'
-        rows={3}
+        rows={4}
         value={description}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
           setDescription(e.target.value);

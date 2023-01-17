@@ -2,10 +2,10 @@
 
 import FocusTrap from 'focus-trap-react';
 import { useState } from 'react';
-import { AreaInput } from './AreaInput';
-import { NewTodoButton } from './NewTodoButton';
-import { TextInput } from './TextInput';
-import { TodoCard } from './TodoCard';
+import { AreaInput } from '../AreaInput';
+import { NewTodoButton } from '../NewTodoButton';
+import { TextInput } from '../TextInput';
+import { TodoCard } from '../TodoCard';
 
 interface ITodoLists {
   id: string;
@@ -14,6 +14,16 @@ interface ITodoLists {
   description: string;
   createdAt: string;
 }
+
+// const signInWithGithub = async () => {
+//   const { data, error } = await supabase.auth.signInWithOAuth({
+//     provider: 'github',
+//   })
+// }
+
+// const signOut = async () => {
+//   const { error } = await supabase.auth.signOut()
+// }
 
 export default function Index() {
   const [title, setTitle] = useState<string>('');
@@ -27,20 +37,20 @@ export default function Index() {
     const newTodoList = {
       id: Date.now().toString(),
       slug: title.toLowerCase().replaceAll(' ', '-') || Date.now().toString(),
-      title: title || 'Untitled list',
+      title: title || '<UNTITLED>',
       description: description,
       createdAt: new Date().toISOString().slice(0, 10)
     };
 
     setTodoLists([...todoLists, newTodoList]);
     setIsModalOpen(false);
-    setTitle("")
-    setDescription("")
+    setTitle('');
+    setDescription('');
   };
 
   return (
     <>
-      <main className='mx-auto mb-[4.25rem] grid w-[87%] grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4 lg:gap-8'>
+      <main className='mb-[4.25rem] grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4 lg:gap-8'>
         <TodoCard
           to='/demo'
           title='Demo ToDo List'
@@ -70,16 +80,16 @@ export default function Index() {
               <h3 className='text-modal-m md:text-modal-d'>New Todo List</h3>
               <TextInput {...{ title, setTitle }} />
               <AreaInput {...{ description, setDescription }} />
-              <div className='flex w-full flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-between md:gap-4'>
+              <div className='flex w-full flex-col items-stretch gap-3 text-white md:flex-row md:items-center md:justify-between md:gap-4'>
                 <button
                   type='submit'
-                  className='rounded-component bg-primary px-5 py-3.5 text-controls'>
+                  className='rounded-component bg-primary px-7 py-3 text-controls'>
                   Create a new list
                 </button>
                 <button
                   type='button'
                   onClick={() => setIsModalOpen(false)}
-                  className='border-box rounded-component border-[3px] border-primary px-5 py-3.5 text-controls'>
+                  className='border-box rounded-component bg-error px-7 py-3 text-controls'>
                   Cancel
                 </button>
               </div>

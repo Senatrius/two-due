@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Info } from '../Info';
-import { Input } from '../Input';
-import { TodoList } from '../TodoList';
-import demoData from '../../public/demoTodos.json';
+import { Info } from '../../Info';
+import { Input } from '../../Input';
+import { TodoList } from '../../TodoList';
+import demoData from '../../../public/demoTodos.json';
 
 export interface ITodo {
   id: string;

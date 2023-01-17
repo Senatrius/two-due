@@ -12,7 +12,7 @@ export const TodoCard = ({ to, title, description, date }: ITodoCard) => {
     <Link
       href={to}
       className='flex-start group flex min-h-[10.5rem] flex-col rounded-component bg-light-element py-3.5 px-4 shadow-lg shadow-light-shadow dark:bg-dark-element dark:shadow-dark-shadow md:px-6'>
-      <h2 className='mb-3 text-card-title text-light-text group-hover:text-light-hover dark:text-dark-text dark:group-hover:text-dark-hover'>
+      <h2 className='mb-3 text-card-title text-light-hover group-hover:text-primary dark:text-dark-hover dark:group-hover:text-primary'>
         {title}
       </h2>
       <p className='text-info text-light-text group-hover:text-light-hover dark:text-dark-text dark:group-hover:text-dark-hover'>

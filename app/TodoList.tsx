@@ -1,7 +1,7 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useState, useEffect } from 'react';
 import { TodoDetails } from './TodoDetails';
-import { ITodo } from './demo/page';
+import { ITodo } from './(todo)/demo/page';
 import { TodoItem } from './TodoItem';
 
 export const TodoList = ({
