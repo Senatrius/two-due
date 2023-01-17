@@ -27,6 +27,7 @@ const getTodoLists = () => {
 };
 
 export default function Index() {
+  const [error, setError] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [todoLists, setTodoLists] = useState<ITodoLists[]>([]);
@@ -34,6 +35,13 @@ export default function Index() {
 
   const createTodoList = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const isTitleDuplicate = todoLists.find(list => list.title === title);
+
+    if (isTitleDuplicate) {
+      setError('Enter a non-existing title...');
+      return;
+    }
 
     const newTodoList = {
       id: Date.now().toString(),
@@ -106,7 +114,7 @@ export default function Index() {
               onSubmit={createTodoList}
               className='relative my-auto mx-auto flex h-auto w-[87%] max-w-[30rem] flex-col items-start gap-3 rounded-component bg-light-element px-4 pt-3.5 pb-5 shadow-xl shadow-light-shadow dark:bg-dark-element md:gap-4 md:px-6'>
               <h3 className='text-modal-m md:text-modal-d'>New Todo List</h3>
-              <TextInput {...{ title, setTitle }} />
+              <TextInput {...{ title, setTitle, error, setError }} />
               <AreaInput {...{ description, setDescription }} />
               <div className='flex w-full flex-col items-stretch gap-3 text-white md:flex-row md:items-center md:justify-between md:gap-4'>
                 <button
