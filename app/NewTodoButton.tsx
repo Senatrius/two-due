@@ -10,6 +10,8 @@ export const NewTodoButton = ({
   return (
     <>
       <button
+        aria-label='New todo list'
+        aria-expanded={isModalOpen}
         onClick={() => setIsModalOpen(!isModalOpen)}
         className='flex min-h-[10.5rem] items-center justify-center rounded-component bg-light-element py-3.5 px-4 text-light-inactive shadow-lg shadow-light-shadow hover:text-primary dark:bg-dark-element dark:text-dark-inactive dark:shadow-dark-shadow dark:hover:text-primary md:px-6'>
         <svg

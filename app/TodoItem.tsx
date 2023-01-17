@@ -32,7 +32,7 @@ export const TodoItem = ({
         </label>
         <button
           type='button'
-          id={id}
+          id={id + '0'}
           onClick={e => deleteItem(e)}
           className='hidden text-light-inactive hover:text-light-hover group-hover:inline-block dark:text-dark-inactive dark:hover:text-dark-hover'>
           <svg
