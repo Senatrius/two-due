@@ -23,7 +23,7 @@ export const TodoList = ({
   deleteItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
   deleteCompletedItems: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }) => {
-  const [width, setWidth] = useState(1000);
+  const [width, setWidth] = useState(9999);
 
   useEffect(() => {
     if (window !== undefined) {

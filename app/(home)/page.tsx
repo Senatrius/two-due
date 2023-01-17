@@ -1,7 +1,7 @@
 'use client';
 
 import FocusTrap from 'focus-trap-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AreaInput } from '../AreaInput';
 import { NewTodoButton } from '../NewTodoButton';
 import { TextInput } from '../TextInput';
@@ -15,15 +15,16 @@ interface ITodoLists {
   createdAt: string;
 }
 
-// const signInWithGithub = async () => {
-//   const { data, error } = await supabase.auth.signInWithOAuth({
-//     provider: 'github',
-//   })
-// }
+const getTodoLists = () => {
+  const storedLists =
+    typeof window !== 'undefined' ? localStorage.getItem(`todoLists`) : null;
 
-// const signOut = async () => {
-//   const { error } = await supabase.auth.signOut()
-// }
+  if (storedLists) {
+    return JSON.parse(storedLists);
+  } else {
+    return [];
+  }
+};
 
 export default function Index() {
   const [title, setTitle] = useState<string>('');
@@ -36,7 +37,8 @@ export default function Index() {
 
     const newTodoList = {
       id: Date.now().toString(),
-      slug: title.toLowerCase().replaceAll(' ', '-') || Date.now().toString(),
+      slug:
+        title.toLowerCase().replaceAll(/[ /]/gi, '-') || Date.now().toString(),
       title: title || '<UNTITLED>',
       description: description,
       createdAt: new Date().toISOString().slice(0, 10)
@@ -48,6 +50,30 @@ export default function Index() {
     setDescription('');
   };
 
+  const deleteList = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const newLists = [...todoLists];
+
+    const clickedListSlug = (e.target as HTMLButtonElement)
+      .parentElement!.children[1].getAttribute('href')!
+      .replace('/', '');
+
+    const clickedListIndex = newLists.findIndex(
+      list => list.slug === clickedListSlug
+    );
+
+    newLists.splice(clickedListIndex, 1);
+    localStorage.removeItem(`todo-${clickedListSlug}`);
+    setTodoLists(newLists);
+  };
+
+  useEffect(() => {
+    setTodoLists(getTodoLists());
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(`todoLists`, JSON.stringify(todoLists));
+  }, [todoLists]);
+
   return (
     <>
       <main className='mb-[4.25rem] grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4 lg:gap-8'>
@@ -56,6 +82,7 @@ export default function Index() {
           title='Demo ToDo List'
           description='Demo todo list created using designs provided by Frontend Mentor.'
           date='2023-01-14'
+          permanent
         />
         {todoLists.map(list => (
           <TodoCard
@@ -64,6 +91,7 @@ export default function Index() {
             title={list.title}
             description={list.description}
             date={list.createdAt}
+            deleteList={deleteList}
           />
         ))}
         <NewTodoButton {...{ isModalOpen, setIsModalOpen }} />
