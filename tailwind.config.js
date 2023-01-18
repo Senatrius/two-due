@@ -1,15 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
-  content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './public/**/*.{jpg, svg}'
+  ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif']
+      },
       borderRadius: {
         component: '0.3125rem'
       },
       backgroundImage: {
         'hero-pattern':
-          "url('../public/icon-check.svg'), linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%))"
+          "url('../public/icon-check.svg'), linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%))",
+        'light-m': "url('../public/bg-mobile-light.jpg')",
+        'light-d': "url('../public/bg-desktop-light.jpg')",
+        'dark-m': "url('../public/bg-mobile-dark.jpg')",
+        'dark-d': "url('../public/bg-desktop-dark.jpg')"
       }
     },
     colors: {
@@ -100,12 +111,6 @@ module.exports = {
           fontWeight: '700'
         }
       ]
-    },
-    backgroundImage: {
-      'light-m': "url('../public/bg-mobile-light.jpg')",
-      'light-d': "url('../public/bg-desktop-light.jpg')",
-      'dark-m': "url('../public/bg-mobile-dark.jpg')",
-      'dark-d': "url('../public/bg-desktop-dark.jpg')"
     }
   },
   plugins: []
