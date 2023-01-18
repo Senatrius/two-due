@@ -5,15 +5,13 @@ import React, { useState, useEffect } from 'react';
 import { Header } from './Header';
 import { ThemeContext } from './ThemeContext';
 
-const root = document!.querySelector('html') as HTMLElement;
-
 export const ThemeContextWrapper = ({
   children
 }: {
   children: React.ReactNode;
 }) => {
   const path = usePathname()!;
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+  const [theme, setTheme] = useState('dark');
 
   const toggleTheme = (newTheme: 'light' | 'dark') => {
     setTheme(newTheme);
@@ -21,8 +19,13 @@ export const ThemeContextWrapper = ({
   };
 
   useEffect(() => {
-    if (theme === 'dark') root.classList.add('dark');
-    else root.classList.remove('dark');
+    setTheme(localStorage.getItem('theme') || 'dark');
+  }, []);
+
+  useEffect(() => {
+    const root = document.querySelector('html') as HTMLElement;
+    if (theme !== 'dark') root.classList.remove('dark');
+    else root.classList.add('dark');
   }, [theme]);
 
   return (
