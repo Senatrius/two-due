@@ -35,11 +35,11 @@ export default function Index() {
 
   useEffect(() => {
     setTasks(getStoredTodos(path));
-  }, []);
+  }, [path]);
 
   useEffect(() => {
     localStorage.setItem(`todo-${path}`, JSON.stringify(tasks));
-  }, [tasks]);
+  }, [path, tasks]);
 
   const filteredTasks =
     filter === 'completed'
