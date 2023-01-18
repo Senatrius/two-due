@@ -119,13 +119,13 @@ export default function Index() {
               <div className='flex w-full flex-col items-stretch gap-3 text-white md:flex-row md:items-center md:justify-between md:gap-4'>
                 <button
                   type='submit'
-                  className='rounded-component bg-primary px-7 py-3 text-controls'>
+                  className='rounded-component bg-primary px-7 py-3 text-controls hover:brightness-125'>
                   Create a new list
                 </button>
                 <button
                   type='button'
                   onClick={() => setIsModalOpen(false)}
-                  className='border-box rounded-component bg-error px-7 py-3 text-controls'>
+                  className='border-box rounded-component bg-error px-7 py-3 text-controls hover:brightness-125'>
                   Cancel
                 </button>
               </div>

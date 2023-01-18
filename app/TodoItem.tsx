@@ -27,7 +27,7 @@ export const TodoItem = ({
         />
         <label
           htmlFor={id}
-          className='flex w-full cursor-pointer items-center py-3.5 group-hover:text-light-hover peer-checked:text-light-complete peer-checked:line-through dark:group-hover:text-dark-hover dark:peer-checked:text-dark-inactive'>
+          className='flex w-full cursor-pointer items-center py-3.5 group-hover:text-light-hover peer-checked:text-light-complete peer-checked:line-through dark:group-hover:text-dark-hover dark:peer-checked:text-dark-inactive md:py-4'>
           {task}
         </label>
         <button
